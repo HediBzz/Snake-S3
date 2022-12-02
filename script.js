@@ -259,3 +259,58 @@ function movesnake() {
         youlose = 1;
     }
 }
+
+function checkkeypress() {
+    //fonction qui permet une transition fluide a chaque changement de direction du serpent 
+
+    //transition lorsqu'on tourne a droite
+    if (touche[0] == true && Number.isInteger(snakebody[0].xpos / 64) && Number.isInteger(snakebody[0].ypos / 64)) {
+        if (snakebody[1] !== undefined) {
+            if (snakebody[1].xpos == snakebody[0].xpos + 64 && snakebody[1].ypos == snakebody[0].ypos) {
+                return;
+            }
+        }
+        direction[0] = true;
+        direction[1] = false;
+        direction[2] = false;
+        direction[3] = false;
+    }
+
+    //transition lorsqu'on tourne a gauche
+    if (touche[1] == true && Number.isInteger(snakebody[0].xpos / 64) && Number.isInteger(snakebody[0].ypos / 64)) {
+        if (snakebody[1] !== undefined) {
+            if (snakebody[1].xpos == snakebody[0].xpos - 64 && snakebody[1].ypos == snakebody[0].ypos) {
+                return;
+            }
+        }
+        direction[0] = false;
+        direction[1] = true;
+        direction[2] = false;
+        direction[3] = false;
+    }
+
+    //transition lorsqu'on tourne en haut
+    if (touche[2] == true && Number.isInteger(snakebody[0].xpos / 64) && Number.isInteger(snakebody[0].ypos / 64)) {
+        if (snakebody[1] !== undefined) {
+            if (snakebody[1].xpos == snakebody[0].xpos && snakebody[1].ypos == snakebody[0].ypos - 64) {
+                return;
+            }
+        }
+        direction[0] = false;
+        direction[1] = false;
+        direction[2] = true;
+        direction[3] = false;
+    }
+    //transition lorsqu'on tourne en bas
+    if (touche[3] == true && Number.isInteger(snakebody[0].xpos / 64) && Number.isInteger(snakebody[0].ypos / 64)) {
+        if (snakebody[1] !== undefined) {
+            if (snakebody[1].xpos == snakebody[0].xpos && snakebody[1].ypos == snakebody[0].ypos + 64) {
+                return;
+            }
+        }
+        direction[0] = false;
+        direction[1] = false;
+        direction[2] = false;
+        direction[3] = true;
+    }
+}
