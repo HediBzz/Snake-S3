@@ -11,49 +11,6 @@ btnRestart.addEventListener("click", function () {
     location.reload();
 });
 
-var snakeeats = [];
-snakeeats[0] = new pomme();
-
-var touche = [false, false, false, false];
-
-var direction = [false, false, false, false];
-
-var vitesse = 4;
-
-var youlose = 0;
-var score = 0;
-
-var canvasss = document.createElement("canvas");
-canvasss.width = 640;
-canvasss.height = 640;
-
-
-var graphicserpent = [];
-
-graphicserpent[0] = new Image();
-graphicserpent[0].src = "images/snake.png";
-graphicserpent[2] = new Image();
-graphicserpent[2].src = "images/snakecorp.png";
-graphicserpent[3] = new Image();
-graphicserpent[3].src = "images/snakecorp.png";
-graphicserpent[4] = new Image();
-graphicserpent[4].src = "images/snakecorp.png";
-
-var snakeeatgraphics = [];
-snakeeatgraphics[0] = new Image();
-snakeeatgraphics[0].src = "images/eats1.png";
-snakeeatgraphics[1] = new Image();
-snakeeatgraphics[1].src = "images/eats1.png";
-snakeeatgraphics[2] = new Image();
-snakeeatgraphics[2].src = "images/eats1.png";
-
-
-var snakebody = [];
-snakebody[0] = new partieserpent(320, 320);
-snakebody[0].color = 0;
-
-
-
 function bouttondebut() {
     let ecran_debut = document.getElementById('ecran_debut');
     ecran_debut.parentNode.removeChild(ecran_debut);
@@ -98,9 +55,46 @@ class pomme {
     }
 }
 
+var graphicserpent = [];
+
+graphicserpent[0] = new Image();
+graphicserpent[0].src = "images/snake.png";
+graphicserpent[2] = new Image();
+graphicserpent[2].src = "images/snakecorp.png";
+graphicserpent[3] = new Image();
+graphicserpent[3].src = "images/snakecorp.png";
+graphicserpent[4] = new Image();
+graphicserpent[4].src = "images/snakecorp.png";
+
+var snakeeatgraphics = [];
+snakeeatgraphics[0] = new Image();
+snakeeatgraphics[0].src = "images/eats1.png";
+snakeeatgraphics[1] = new Image();
+snakeeatgraphics[1].src = "images/eats1.png";
+snakeeatgraphics[2] = new Image();
+snakeeatgraphics[2].src = "images/eats1.png";
+
+
+var snakebody = [];
+snakebody[0] = new partieserpent(320, 320);
+snakebody[0].color = 0;
+
+
+
+var snakeeats = [];
+snakeeats[0] = new pomme();
+
+var touche = [false, false, false, false];
+
+var direction = [false, false, false, false];
+
+var vitesse = 4;
+
+var youlose = 0;
+var score = 0;
 
 function game() {
-    //le jeu
+
 
 
     if (youlose == 1) {
@@ -137,6 +131,10 @@ function game() {
 
 }
 
+var canvasss = document.createElement("canvas");
+canvasss.width = 640;
+canvasss.height = 640;
+
 
 
 const fruit = function (m) {
@@ -150,7 +148,7 @@ const fruit = function (m) {
         score++;
         snakeeats.splice(m, 1);
         snakeeats.push(new pomme());
-        var son = new Audio("Eating sound effect LUCAS ARPON TV (mp3cut.net).mp3");
+        var son = new Audio("miam.mp3");
         son.play();
         snakebody.push(new partieserpent(snakebody[0].xpos, snakebody[0].ypos));
 
@@ -162,12 +160,9 @@ const fruit = function (m) {
     }
 };
 
-
 function drawsnake() {
     ctx.drawImage(graphicserpent[2], this.xpos, this.ypos, this.width, this.height);
 }
-
-
 function movepieces() {
     this.movetimer--;
     if (this.movetimer > -1) {
@@ -183,13 +178,16 @@ function movepieces() {
     if (ypos < 0) {
         zpos = zpos * -1;
     }
+
     if (zpos < 32 && zpos > -1 &&
         ypos < 32 && ypos > -1) {
         youlose = 1;
     }
+
     if (Number.isInteger(this.xpos / 64) && Number.isInteger(this.ypos / 64)) {
         this.keyhistory.shift();
     }
+
     if (this.keyhistory[0] == 0) {
         this.xpos += vitesse;
     }
@@ -202,7 +200,11 @@ function movepieces() {
     if (this.keyhistory[0] == 3) {
         this.ypos += vitesse;
     }
+
+
+
 }
+
 function movesnake() {
     //fonction qui permet de tourner
 
@@ -301,6 +303,7 @@ function checkkeypress() {
         direction[2] = true;
         direction[3] = false;
     }
+
     //transition lorsqu'on tourne en bas
     if (touche[3] == true && Number.isInteger(snakebody[0].xpos / 64) && Number.isInteger(snakebody[0].ypos / 64)) {
         if (snakebody[1] !== undefined) {
@@ -314,3 +317,42 @@ function checkkeypress() {
         direction[3] = true;
     }
 }
+
+
+document.addEventListener("keydown", keyDown, false);
+
+function keyDown(e) {
+
+
+    if (e.keyCode == 39) {
+        //verifie lorsque on appuie sur la fleche de droite
+        touche[0] = true;
+        touche[1] = false;
+        touche[2] = false;
+        touche[3] = false;
+    }
+    if (e.keyCode == 37) {
+        //verifie lorsque on appuie sur la fleche de gauche
+        touche[0] = false;
+        touche[1] = true;
+        touche[2] = false;
+        touche[3] = false;
+    }
+    if (e.keyCode == 38) {
+        //verifie lorsque on appuie sur la fleche du haut
+        touche[0] = false;
+        touche[1] = false;
+        touche[2] = true;
+        touche[3] = false;
+    }
+    if (e.keyCode == 40) {
+        //verifie lorsque on appuie sur la fleche du bas
+        touche[0] = false;
+        touche[1] = false;
+        touche[2] = false;
+        touche[3] = true;
+    }
+}
+
+//initialise la vitesse du jeu
+gameContainer = setInterval(game, vitessedujeu);
