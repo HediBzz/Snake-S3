@@ -203,3 +203,59 @@ function movepieces() {
         this.ypos += vitesse;
     }
 }
+function movesnake() {
+    //fonction qui permet de tourner
+
+    //tourne a droite
+    if (direction[0] == true) {
+
+        if (Number.isInteger(snakebody[0].xpos / 64) && Number.isInteger(snakebody[0].ypos / 64)) {
+            snakebody[0].keyhistory.push(0);
+            for (xpos = snakebody.length - 1; xpos > 0; xpos--) {
+                snakebody[xpos].keyhistory.push(0);
+            }
+        }
+        snakebody[0].xpos += vitesse;
+    }
+
+    //tourne a gauche
+    if (direction[1] == true) {
+        if (Number.isInteger(snakebody[0].xpos / 64) && Number.isInteger(snakebody[0].ypos / 64)) {
+            snakebody[0].keyhistory.push(1);
+            for (xpos = snakebody.length - 1; xpos > 0; xpos--) {
+                snakebody[xpos].keyhistory.push(1);
+            }
+        }
+        snakebody[0].xpos -= vitesse;
+    }
+
+    //tourne vers le haut
+    if (direction[2] == true) {
+        if (Number.isInteger(snakebody[0].xpos / 64) && Number.isInteger(snakebody[0].ypos / 64)) {
+            snakebody[0].keyhistory.push(2);
+            for (xpos = snakebody.length - 1; xpos > 0; xpos--) {
+                snakebody[xpos].keyhistory.push(2);
+            }
+        }
+        snakebody[0].ypos -= vitesse;
+    }
+
+    //tourne vers le bas
+    if (direction[3] == true) {
+        if (Number.isInteger(snakebody[0].xpos / 64) && Number.isInteger(snakebody[0].ypos / 64)) {
+            snakebody[0].keyhistory.push(3);
+            for (xpos = snakebody.length - 1; xpos > 0; xpos--) {
+                snakebody[xpos].keyhistory.push(3);
+            }
+        }
+        snakebody[0].ypos += vitesse;
+    }
+    //lorsque le snake est de taille 1 il peut bouger dans les 4 directions
+    if (snakebody[0].keyhistory.length > 1) {
+        snakebody[0].keyhistory.shift();
+    }
+    //test qui nous fait perdre quand on se mord la queue
+    if (snakebody[0].xpos < 0 || snakebody[0].xpos > 768 - 64 || snakebody[0].ypos < 0 || snakebody[0].ypos > 768 - 64) {
+        youlose = 1;
+    }
+}
