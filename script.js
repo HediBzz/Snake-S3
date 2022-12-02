@@ -356,3 +356,23 @@ function keyDown(e) {
 
 //initialise la vitesse du jeu
 gameContainer = setInterval(game, vitessedujeu);
+
+
+
+//pour permettre de selectionner différent niveau   
+document.getElementById("niveau").addEventListener('input', getniveau);
+function getniveau(niveau) {
+    fetch("niveau" + niveau + ".json").then(function (response) {
+        if (response.ok) {
+            response.json().then(function (data) {
+                vitesse = data.vitesse_du_jeu;
+            }).catch(function (e) {
+                console.error(e);
+            });
+        } else {
+            console.error(response.status);
+        }
+    }).catch(function (e) {
+        console.error(e);
+    });
+}
