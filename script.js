@@ -92,3 +92,45 @@ var vitesse = 4;
 
 var youlose = 0;
 var score = 0;
+
+function game() {
+    //le jeu
+
+
+    if (youlose == 1) {
+
+        return bouttonfin();
+    }
+
+    ctx.beginPath();
+    ctx.rect(0, 0, 768, 768);
+    ctx.fillStyle = '#63E75D';
+    ctx.fill();
+
+    ctx.lineWidth = 5;
+    ctx.strokeRect(0, 0, 768, 768);
+
+
+    checkkeypress();
+    movesnake();
+
+
+    for (xpos = snakebody.length - 1; xpos > 0; xpos--) {
+        movepieces.call(snakebody[xpos]);
+    }
+
+    for (xpos = 0; xpos < snakeeats.length; xpos++) {
+        fruit.call(snakeeats[xpos], xpos);
+        vitessedujeu = vitessedujeu - 4;
+    }
+
+
+    for (xpos = snakebody.length - 1; xpos > -1; xpos--) {
+        drawsnake.call(snakebody[xpos]);
+    }
+
+}
+
+var canvasss = document.createElement("canvas");
+canvasss.width = 640;
+canvasss.height = 640;
