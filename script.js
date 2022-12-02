@@ -134,3 +134,26 @@ function game() {
 var canvasss = document.createElement("canvas");
 canvasss.width = 640;
 canvasss.height = 640;
+
+const fruit = function (m) {
+    ctx.drawImage(snakeeatgraphics[this.piece], this.xpos, this.ypos, this.width, this.height);
+
+    zpos = snakebody[0].xpos - this.xpos;
+    ypos = snakebody[0].ypos - this.ypos;
+
+    if (zpos < 64 && zpos > -1 &&
+        ypos < 64 && ypos > -1) {
+        score++;
+        snakeeats.splice(m, 1);
+        snakeeats.push(new pomme());
+        var son = new Audio("Eating sound effect LUCAS ARPON TV (mp3cut.net).mp3");
+        son.play();
+        snakebody.push(new partieserpent(snakebody[0].xpos, snakebody[0].ypos));
+
+        snakebody[snakebody.length - 1].keyhistory[0] = snakebody[0].keyhistory[0];
+        snakebody[snakebody.length - 1].movetimer = (snakebody.length - 1) * 16;
+
+        console.log(score);
+        document.querySelector('#score').textContent = score;
+    }
+};
