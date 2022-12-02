@@ -1,13 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="script.js" > </script>
+	<link rel="shortcut icon" href="#">
+	<meta charset="utf-8" />
+	<title>Snake</title>
+	<link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
-    
+	<h1 > 
+		score : <span id="score">0</span>
+	</h1>
+	<section id="ecran_debut">
+		<button id="jouer" class="button">Jouer</button>
+
+	</section>
+	<canvas id="myCanvas" width="798" height="768" color></canvas>
+
+	<button style="display: none" id="restart" class="button">Rejouer</button>
+
 </body>
+<script type="text/javascript" src="script.js"></script>
+
 </html>
