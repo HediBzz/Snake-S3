@@ -11,6 +11,49 @@ btnRestart.addEventListener("click", function () {
     location.reload();
 });
 
+var snakeeats = [];
+snakeeats[0] = new pomme();
+
+var touche = [false, false, false, false];
+
+var direction = [false, false, false, false];
+
+var vitesse = 4;
+
+var youlose = 0;
+var score = 0;
+
+var canvasss = document.createElement("canvas");
+canvasss.width = 640;
+canvasss.height = 640;
+
+
+var graphicserpent = [];
+
+graphicserpent[0] = new Image();
+graphicserpent[0].src = "images/snake.png";
+graphicserpent[2] = new Image();
+graphicserpent[2].src = "images/snakecorp.png";
+graphicserpent[3] = new Image();
+graphicserpent[3].src = "images/snakecorp.png";
+graphicserpent[4] = new Image();
+graphicserpent[4].src = "images/snakecorp.png";
+
+var snakeeatgraphics = [];
+snakeeatgraphics[0] = new Image();
+snakeeatgraphics[0].src = "images/eats1.png";
+snakeeatgraphics[1] = new Image();
+snakeeatgraphics[1].src = "images/eats1.png";
+snakeeatgraphics[2] = new Image();
+snakeeatgraphics[2].src = "images/eats1.png";
+
+
+var snakebody = [];
+snakebody[0] = new partieserpent(320, 320);
+snakebody[0].color = 0;
+
+
+
 function bouttondebut() {
     let ecran_debut = document.getElementById('ecran_debut');
     ecran_debut.parentNode.removeChild(ecran_debut);
@@ -55,43 +98,6 @@ class pomme {
     }
 }
 
-var graphicserpent = [];
-
-graphicserpent[0] = new Image();
-graphicserpent[0].src = "images/snake.png";
-graphicserpent[2] = new Image();
-graphicserpent[2].src = "images/snakecorp.png";
-graphicserpent[3] = new Image();
-graphicserpent[3].src = "images/snakecorp.png";
-graphicserpent[4] = new Image();
-graphicserpent[4].src = "images/snakecorp.png";
-
-var snakeeatgraphics = [];
-snakeeatgraphics[0] = new Image();
-snakeeatgraphics[0].src = "images/eats1.png";
-snakeeatgraphics[1] = new Image();
-snakeeatgraphics[1].src = "images/eats1.png";
-snakeeatgraphics[2] = new Image();
-snakeeatgraphics[2].src = "images/eats1.png";
-
-
-var snakebody = [];
-snakebody[0] = new partieserpent(320, 320);
-snakebody[0].color = 0;
-
-
-
-var snakeeats = [];
-snakeeats[0] = new pomme();
-
-var touche = [false, false, false, false];
-
-var direction = [false, false, false, false];
-
-var vitesse = 4;
-
-var youlose = 0;
-var score = 0;
 
 function game() {
     //le jeu
@@ -131,9 +137,7 @@ function game() {
 
 }
 
-var canvasss = document.createElement("canvas");
-canvasss.width = 640;
-canvasss.height = 640;
+
 
 const fruit = function (m) {
     ctx.drawImage(snakeeatgraphics[this.piece], this.xpos, this.ypos, this.width, this.height);
@@ -157,3 +161,45 @@ const fruit = function (m) {
         document.querySelector('#score').textContent = score;
     }
 };
+
+
+function drawsnake() {
+    ctx.drawImage(graphicserpent[2], this.xpos, this.ypos, this.width, this.height);
+}
+
+
+function movepieces() {
+    this.movetimer--;
+    if (this.movetimer > -1) {
+        return;
+    }
+
+    zpos = snakebody[0].xpos - this.xpos;
+    ypos = snakebody[0].ypos - this.ypos;
+
+    if (zpos < 0) {
+        zpos = zpos * -1;
+    }
+    if (ypos < 0) {
+        zpos = zpos * -1;
+    }
+    if (zpos < 32 && zpos > -1 &&
+        ypos < 32 && ypos > -1) {
+        youlose = 1;
+    }
+    if (Number.isInteger(this.xpos / 64) && Number.isInteger(this.ypos / 64)) {
+        this.keyhistory.shift();
+    }
+    if (this.keyhistory[0] == 0) {
+        this.xpos += vitesse;
+    }
+    if (this.keyhistory[0] == 1) {
+        this.xpos -= vitesse;
+    }
+    if (this.keyhistory[0] == 2) {
+        this.ypos -= vitesse;
+    }
+    if (this.keyhistory[0] == 3) {
+        this.ypos += vitesse;
+    }
+}
