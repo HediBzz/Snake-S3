@@ -1,5 +1,11 @@
 # Snake JS Hedi Eyoub
 
+Voici notre projet snake, 
+
+Nous avons préferé utiliser des coordonnées x / y au lieu d'un tableau pour le canvas, afin que les mouvements du snake soit fluide et pour une sensation de jeu professionel.
+
+Nous avons implémenté des fichiers .json et un bouton "niveau" qui ne fonctionnent pas, ce pourquoi la console retourne des erreurs. (si on ne selectionne pas de niveau, la console ne retourne pas d'erreur, le jeu se lance normalement)
+
 
 
 ## Getting started
